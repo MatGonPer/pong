@@ -15,6 +15,7 @@ int main() {
     float playerY = (SCREEN_HEIGHT / 2) - 50;
     float playerWidth = 10;
     float playerHeight = 100;
+    float playerSpeed = 350.0f;
 
     //Oponent
     float opponentX = SCREEN_WIDTH - 50 - 10;
@@ -28,6 +29,27 @@ int main() {
     float ballRadius = 8;
 
     while(!WindowShouldClose()) {
+        //Pega o delta time
+        float dt = GetFrameTime();
+
+        //Verifica se a teclad W está sendo pressionada e altera a lógica da posição do jogador
+        if(IsKeyDown(KEY_W)) {
+            playerY -= playerSpeed * dt;
+        }
+
+        if(IsKeyDown(KEY_S)) {
+            playerY += playerSpeed * dt;
+        }
+
+        //Deixa a raquete dentro dos limites da tela
+        if(playerY < 0) {
+            playerY = 0;
+        }
+
+        if(playerY + playerHeight > SCREEN_HEIGHT) {
+            playerY = SCREEN_HEIGHT - playerHeight;
+        }
+
         BeginDrawing();
             ClearBackground(BLACK);
             //Desenha jogador
