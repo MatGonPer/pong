@@ -27,11 +27,14 @@ int main() {
     float ballX = SCREEN_WIDTH / 2;
     float ballY = SCREEN_HEIGHT / 2;
     float ballRadius = 8;
+    float ballSpeedX = 250.0f;
+    float ballSpeedY = 250.0f;
 
     while(!WindowShouldClose()) {
         //Pega o delta time
         float dt = GetFrameTime();
 
+        //Lógica para o jogador
         //Verifica se a teclad W está sendo pressionada e altera a lógica da posição do jogador
         if(IsKeyDown(KEY_W)) {
             playerY -= playerSpeed * dt;
@@ -48,6 +51,18 @@ int main() {
 
         if(playerY + playerHeight > SCREEN_HEIGHT) {
             playerY = SCREEN_HEIGHT - playerHeight;
+        }
+
+        //Lógica para a bola
+        ballX += ballSpeedX * dt;
+        ballY += ballSpeedY * dt;
+
+        if(ballY - ballRadius < 0) {
+            ballSpeedY *= -1;
+        }
+
+        if(ballY + ballRadius > SCREEN_HEIGHT) {
+            ballSpeedY *= -1;
         }
 
         BeginDrawing();
