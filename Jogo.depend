@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1750363654 source:/home/matheus/Documentos/CWorkspace/Jogo/main.c
+1750400163 source:/home/matheus/Documentos/CWorkspace/Jogo/main.c
 	<stdio.h>
 	<stdlib.h>
 	"raylib.h"

@@ -22,6 +22,7 @@ int main() {
     float opponentY = (SCREEN_HEIGHT / 2) - 50;
     float opponentWidth = 10;
     float opponentHeight = 100;
+    float opponentSpeed = 300.0f;
 
     //Bola
     float ballX = SCREEN_WIDTH / 2;
@@ -42,6 +43,26 @@ int main() {
 
         if(IsKeyDown(KEY_S)) {
             playerY += playerSpeed * dt;
+        }
+
+        //Ia do oponente
+        float opponentCenterY = opponentY + (opponentHeight / 2.0f);
+
+        if(opponentCenterY < ballY) {
+            opponentY += opponentSpeed * dt;
+        }
+
+        if(opponentCenterY > ballY) {
+            opponentY -= opponentSpeed * dt;
+        }
+
+        //Limites na tela para o oponente
+        if(opponentY < 0) {
+            opponentY = 0;
+        }
+
+        if(opponentY + opponentHeight > SCREEN_HEIGHT) {
+            opponentY = SCREEN_HEIGHT - opponentHeight;
         }
 
         //Deixa a raquete dentro dos limites da tela
@@ -74,6 +95,7 @@ int main() {
             ballSpeedX *= -1;
         }
 
+        //Desenhar na tela
         BeginDrawing();
             ClearBackground(BLACK);
             //Desenha jogador
