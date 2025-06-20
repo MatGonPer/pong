@@ -97,6 +97,21 @@ int main() {
 
         if(CheckCollisionCircleRec(ball, ballRadius, playerRectangle) || CheckCollisionCircleRec(ball, ballRadius, opponentRectangle)) {
             ballSpeedX *= -1;
+
+            //Acelera a bola gradativamente
+            float aceleracao = 20.0f;
+
+            if(ballSpeedX > 0) {
+                ballSpeedX += aceleracao;
+            } else {
+                ballSpeedX -= aceleracao;
+            }
+
+            if(ballSpeedY > 0) {
+                ballSpeedY += aceleracao;
+            } else {
+                ballSpeedY -= aceleracao;
+            }
         }
 
         //Lógica de pontos e reset
@@ -106,8 +121,8 @@ int main() {
             ballX = SCREEN_WIDTH / 2.0f;
             ballY = SCREEN_HEIGHT /2.0f;
 
-            ballSpeedX *= -1;
-            ballSpeedY *= -1;
+            ballSpeedX = -250.0f;
+            ballSpeedY = 250.0f;
         }
 
         if(ballX + ballRadius > SCREEN_WIDTH) {
@@ -116,8 +131,8 @@ int main() {
             ballX = SCREEN_WIDTH / 2.0f;
             ballY = SCREEN_HEIGHT / 2.0f;
 
-            ballSpeedX *= -1;
-            ballSpeedY *= -1;
+            ballSpeedX = 250.0f;
+            ballSpeedY = 250.0f;
         }
 
         //Desenhar na tela
