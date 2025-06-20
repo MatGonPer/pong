@@ -65,6 +65,15 @@ int main() {
             ballSpeedY *= -1;
         }
 
+        //Colisao da bola com os retangulos
+        Rectangle playerRectangle = {playerX, playerY, playerWidth, playerHeight};
+        Rectangle opponentRectangle = {opponentX, opponentY, opponentWidth, opponentHeight};
+        Vector2 ball = {ballX, ballY,};
+
+        if(CheckCollisionCircleRec(ball, ballRadius, playerRectangle) || CheckCollisionCircleRec(ball, ballRadius, opponentRectangle)) {
+            ballSpeedX *= -1;
+        }
+
         BeginDrawing();
             ClearBackground(BLACK);
             //Desenha jogador
