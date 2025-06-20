@@ -31,6 +31,10 @@ int main() {
     float ballSpeedX = 250.0f;
     float ballSpeedY = 250.0f;
 
+    //Pontuação
+    int playerScore = 0;
+    int opponentScore = 0;
+
     while(!WindowShouldClose()) {
         //Pega o delta time
         float dt = GetFrameTime();
@@ -95,6 +99,27 @@ int main() {
             ballSpeedX *= -1;
         }
 
+        //Lógica de pontos e reset
+        if(ballX - ballRadius < 0) {
+            opponentScore++;
+
+            ballX = SCREEN_WIDTH / 2.0f;
+            ballY = SCREEN_HEIGHT /2.0f;
+
+            ballSpeedX *= -1;
+            ballSpeedY *= -1;
+        }
+
+        if(ballX + ballRadius > SCREEN_WIDTH) {
+            playerScore++;
+
+            ballX = SCREEN_WIDTH / 2.0f;
+            ballY = SCREEN_HEIGHT / 2.0f;
+
+            ballSpeedX *= -1;
+            ballSpeedY *= -1;
+        }
+
         //Desenhar na tela
         BeginDrawing();
             ClearBackground(BLACK);
@@ -104,6 +129,12 @@ int main() {
             DrawRectangle(opponentX, opponentY, opponentWidth, opponentHeight, WHITE);
             //Desenha bola
             DrawCircle(ballX, ballY, ballRadius, WHITE);
+            //Desenha placar
+            const char *playerScoreText = TextFormat("%d", playerScore);
+            const char *opponentScoreText = TextFormat("%d", opponentScore);
+
+            DrawText(playerScoreText, SCREEN_WIDTH / 4, 20, 40, WHITE);
+            DrawText(opponentScoreText, 3 * SCREEN_WIDTH / 4 - 40, 20, 40, WHITE);
         EndDrawing();
     }
 
